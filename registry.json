@@ -75,6 +75,20 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "quizzes-game",
+      "type": "registry:component",
+      "title": "Quizzes Game",
+      "description": "An interactive quizzes game component.",
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/quizzes-game/quizzes-game.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
