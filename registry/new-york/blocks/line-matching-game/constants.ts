@@ -200,3 +200,32 @@ export const colors = [
     shadow: "0px 5px 0px 0px #EE82EE",
   },
 ];
+
+export const DATA: {
+  label: string;
+  definition: string;
+}[] = [
+  {
+    label: "Paulo Bento",
+    definition:
+      "Huấn luyện viên tin tưởng Nani từ khi còn ở học viện và giúp anh phát triển sự nghiệp.",
+  },
+  {
+    label: "Jose Peseiro",
+    definition: "Huấn luyện viên trao cơ hội ra mắt Champions League cho Nani.",
+  },
+  {
+    label: "Sir Alex Ferguson",
+    definition:
+      "Huấn luyện viên nghiêm khắc nhưng kỳ vọng lớn ở Nani tại Man United.",
+  },
+  {
+    label: "Cristiano Ronaldo",
+    definition: "Đồng đội giúp Nani vượt qua khó khăn ban đầu tại Man United.",
+  },
+  {
+    label: "Portugal Football Summit",
+    definition:
+      "Sự kiện bóng đá nơi Nani chia sẻ về những người thầy của mình.",
+  },
+];
