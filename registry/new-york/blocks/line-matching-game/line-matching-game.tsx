@@ -2,20 +2,18 @@
 
 import {
   ReactFlow,
-  Background,
   Controls,
   Connection,
   addEdge,
   getConnectedEdges,
   Edge,
   reconnectEdge,
-  OnConnectStartParams,
   Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { DefinitionNode, LabelNode, CustomNodeDataType } from "./custom-node";
-import { useCallback, useEffect, useState } from "react";
-import { initNodes } from "./utils";
+import { useCallback, useState } from "react";
+import { initNodes, checkCorrectConnection } from "./utils";
 import { DATA } from "./constants";
 import { CustomColorEdge } from "./custom-edge";
 import { GameControll } from "./game-controll";
@@ -34,6 +32,11 @@ export const LineMatchingGame = () => {
     return initNodes(DATA);
   });
   const [edges, setEdges] = useState<Edge[]>([]);
+  const [result, setResult] = useState<{
+    isCorrect: boolean;
+    correctCount: number;
+    totalCount: number;
+  } | null>(null);
 
   const onConnect = (connection: Connection) => {
     const { source, target } = connection;
@@ -66,11 +69,36 @@ export const LineMatchingGame = () => {
   );
 
   const checkAnswers = () => {
+    const checkResult = checkCorrectConnection(nodes, edges, DATA);
+    setResult(checkResult);
+
+    // Visual feedback for correct/incorrect connections
     edges.forEach((edge) => {
-      const sourceNode = nodes.find((node) => node.id === edge.source);
-      const targetNode = nodes.find((node) => node.id === edge.target);
-      if (!sourceNode || !targetNode) return;
+      const labelIndex = parseInt(edge.source.replace("label-", ""));
+      const definitionIndex = parseInt(edge.target.replace("definition-", ""));
+      const isCorrect = labelIndex === definitionIndex;
+
+      const targetNodeElement = document.querySelector(
+        `[data-id='${edge.target}']`
+      ) as HTMLElement;
+
+      if (targetNodeElement) {
+        // Add visual feedback based on correctness
+        if (isCorrect) {
+          targetNodeElement.style.setProperty("border-color", "green");
+        } else {
+          targetNodeElement.style.setProperty("border-color", "red");
+        }
+      }
     });
+
+    return checkResult;
+  };
+
+  const reset = () => {
+    setNodes(initNodes(DATA));
+    setEdges([]);
+    setResult(null);
   };
 
   return (
@@ -94,7 +122,7 @@ export const LineMatchingGame = () => {
           <Controls />
         </ReactFlow>
       </div>
-      <GameControll checkAnswers={checkAnswers} reset={() => {}} />
+      <GameControll checkAnswers={checkAnswers} reset={reset} result={result} />
     </div>
   );
 };
