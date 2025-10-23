@@ -89,6 +89,32 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "line-matching-game",
+      "type": "registry:component",
+      "title": "Line Matching Game",
+      "description": "An interactive line matching game using React Flow.",
+      "dependencies": ["@xyflow/react"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/line-matching-game/line-matching-game.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "registry/new-york/blocks/line-matching-game/custom-node.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/new-york/blocks/line-matching-game/utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/new-york/blocks/line-matching-game/constants.ts",
+          "type": "registry:lib"
+        }
+      ]
     }
   ]
 }
